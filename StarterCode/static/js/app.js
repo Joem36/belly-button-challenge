@@ -19,14 +19,14 @@ function init(){
        
         // pass first subject and call the functions
         valuecharts(names[0]);
-        metad(names[0]);
+        metadata(names[0]);
     });
 };
 // function when the subject id changes
 function optionChanged(intitiatevalue) {
 
     valuecharts(intitiatevalue);
-    metad(intitiatevalue);
+    metadata(intitiatevalue);
 };
 // function to 
 function  valuecharts(intitiatevalue){
@@ -46,6 +46,7 @@ function  valuecharts(intitiatevalue){
 
     });
 };
+    
 // function display for bubble chart
 
 
@@ -74,7 +75,7 @@ function charts(sample_values, otu_ids, otu_labels){
             text: otu_labels,
             orientation: 'h'
         }];
-
+        
         
      // format for bubble chart
      let bubble_layout = {
@@ -101,7 +102,7 @@ function charts(sample_values, otu_ids, otu_labels){
 
     });
 };
-function metad(intitiatevalue){
+function metadata(intitiatevalue){
 
     // json data
     d3.json(url).then(function(alldata){
@@ -112,13 +113,14 @@ function metad(intitiatevalue){
         // filter data from metadata
         let id = samples.filter(take=>take.id == intitiatevalue);
 
-        let sample_metadata = d3.select("panel-body").html('');
+        let metadata_d = d3.select("#sample-metadata");
+        metadata_d.html('');
 
         // using array to iterate through the values
         Object.entries(id[0]).forEach(([key, value]) => {
             
             // display information in demographic info chart/table
-            sample_metadata.append("h3").text(`${key}: ${value}`);
+            metadata_d.append("h3").text(`${key}: ${value}`);
         });
     });
 };
